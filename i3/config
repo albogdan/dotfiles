@@ -29,7 +29,8 @@ font pango:monospace 8
 #-----------------Startup commands------------------------#
 # Install lxappearance to change themes on i3
 # Start a volume icon
-exec_always --no-startup-id volumeicon &
+#exec_always --no-startup-id volumeicon &
+exec_always --no-startup-id /usr/bin/pasystray &
 
 # Start keyring for persistant logins
 exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=secrets,ssh
@@ -268,8 +269,8 @@ bindsym XF86AudioLowerVolume exec amixer -q set Master 1- unmute
 bindsym XF86AudioMute exec amixer -q -D pulse set Master toggle
 
 # Sreen brightness controls
-#bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
-#bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
+bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
 
 # Touchpad controls
 #bindsym XF86TouchpadToggle exec /some/path/toggletouchpad.sh # toggle touchpad
@@ -284,6 +285,8 @@ bindsym XF86AudioStop exec playerctl stop
 
 
 # i3lock setup
-exec --no-startup-id xautolock -time 10 -locker 'i3lock -d -c 000000'
+#exec --no-startup-id xautolock -time 10 -locker 'i3lock -d -c 000000'
 
-bindsym $mod+P exec --no-startup-id i3lock -i ~/.config/i3/lockscreen.png
+#bindsym $mod+P exec --no-startup-id i3lock -i ~/.config/i3/lockscreen.png
+#bindsym $mod+P exec --no-startup-id i3lock-fancy -d
+bindsym $mod+P exec  --no-startup-id betterlockscreen -l dim
