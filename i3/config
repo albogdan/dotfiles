@@ -37,6 +37,10 @@ exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=secrets,
 
 # Start google-drive-ocalmfulse for google drive
 exec --no-startup-id sh ~/scripts/googledrive.sh
+
+# Start compton
+exec --no-startup-id compton -b --respect-prop-shadow
+
 #------------------------------------#
 
 # Use Mouse+$mod to drag floating windows to their wanted position
@@ -289,4 +293,10 @@ bindsym XF86AudioStop exec playerctl stop
 
 #bindsym $mod+P exec --no-startup-id i3lock -i ~/.config/i3/lockscreen.png
 #bindsym $mod+P exec --no-startup-id i3lock-fancy -d
-bindsym $mod+P exec  --no-startup-id betterlockscreen -l dim
+bindsym $mod+P exec  --no-startup-id betterlockscreen -l
+
+for_window [class=Viewnior|feh|Audacious|File-roller|Lxappearance|Lxtask|Pavucontrol|Calculator] floating enable
+
+
+# Bind the screenshot taker for a specific area
+bindsym $mod+Shift+s exec gnome-screenshot -a
