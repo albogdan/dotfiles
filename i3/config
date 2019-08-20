@@ -300,3 +300,24 @@ for_window [class=Viewnior|feh|Audacious|File-roller|Lxappearance|Lxtask|Pavucon
 
 # Bind the screenshot taker for a specific area
 bindsym $mod+Shift+s exec gnome-screenshot -a
+
+
+
+
+# Define startup environments
+set $start_env Env: (1) Dev (2) Browsing
+
+bindsym $alt+Shift+1 mode "$start_env"
+
+mode "$start_env" {
+	bindsym 1 exec chromium-browser, exec i3-sensible-terminal, exec i3-sensible-terminal, exec atom, exec postman, mode "default"
+	bindsym 1 exec chromium-browser, mode "default"
+	bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+assign [class="Chromium"] 1
+assign [class="Gnome-terminal"] 2
+assign [class="Atom"] 3
+assign [class="Postman"] 4
+
+
