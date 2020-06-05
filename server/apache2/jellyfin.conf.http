@@ -1,0 +1,43 @@
+<VirtualHost *:80>
+  ServerName jellyfin.andromeda.lan
+  ServerSignature Off
+
+  ProxyPreserveHost On
+  AllowEncodedSlashes NoDecode
+
+
+  <Proxy *>
+        Require all granted
+  </Proxy>
+
+#  <Location />
+#  Require all granted
+
+  ProxyPassReverse / http://127.0.0.1:8096
+  ProxyPassReverse / jellyfin.andromeda.lan
+
+
+  ProxyPass "/embywebsocket" "ws://127.0.0.1:8096/embywebsocket"
+  ProxyPassReverse "/embywebsocket" "ws://127.0.0.1:8096/embywebsocket"
+
+
+#  </Location>
+
+  RewriteEngine on
+  RewriteCond %{DOCUMENT_ROOT}/%{REQUEST_FILENAME} !-f
+  RewriteRule .* http://127.0.0.1:8096%{REQUEST_URI} [P,QSA]
+
+  # needed for downloading attachments
+#  DocumentRoot /opt/gitlab/embedded/service/gitlab-rails/public
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+#     RequestHeader set "X-Forwarded-Proto" expr=%{REQUEST_SCHEME}
+#     RequestHeader set "X-Forwarded-SSL" expr=%{HTTPS}
+
+#RewriteEngine On
+# points our git url to the gitlab workhorse proxy server
+#RewriteRule /[-\/\w\.]+\.git\/ http://127.0.0.1:8282%{REQUEST_URI} [P,QSA,L]
+
+</VirtualHost>

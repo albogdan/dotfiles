@@ -1,0 +1,19 @@
+version: '2'
+
+volumes:
+  nextcloud:
+
+services:
+   nextcloud:
+    image: nextcloud
+    env_file:
+       - nextcloud.env
+    ports:
+      - 8282:80
+    volumes:
+      - nextcloud:/var/www/html
+    restart: unless-stopped
+networks:
+   default:
+      external:
+         name: postgres_db_net

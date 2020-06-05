@@ -1,0 +1,21 @@
+web:
+  image: 'gitlab/gitlab-ce:latest'
+  restart: always
+  hostname: 'gitlab.andromeda.lan'
+  environment:
+    GITLAB_OMNIBUS_CONFIG: |
+      external_url 'https://andromeda.lan'
+      nginx['enable'] = true
+      gitlab_rails['gitlab_shell_ssh_port'] = 222
+      nginx['client_max_body_size'] = '250m'
+      nginx['redirect_http_to_https'] = true
+      nginx['redirect_http_to_https_port'] = 80
+      nginx['ssl_certificate'] = "/etc/gitlab/192.168.1.3.crt"
+      nginx['ssl_certificate_key'] = "/etc/gitlab/192.168.1.3.key"
+  ports:
+    - '8929:80'
+    - '222:22'
+  volumes:
+    - '/home/alex/services/gitlab/config:/etc/gitlab'
+    - '/home/alex/services/gitlab/logs:/var/log/gitlab'
+    - '/home/alex/services/gitlab/data:/var/opt/gitlab'

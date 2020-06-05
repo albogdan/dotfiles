@@ -1,0 +1,55 @@
+version: "3.1"
+services:
+   db:
+      image: postgres
+      restart: unless-stopped
+      env_file:
+         - database.env
+      ports:
+         - "5432:5432"
+      volumes:
+         - database-data:/var/lib/postgresql/data/
+      networks:
+         - main_net
+
+
+   pgadmin:
+      image: dpage/pgadmin4
+      depends_on:
+         - db
+      restart: unless-stopped
+      env_file:
+         - pgadmin.env
+      ports:
+         - "8181:80"
+      networks:
+         - main_net
+
+   nextcloud:
+      image: nextcloud
+      env_file:
+         - nextcloud.env
+      ports:
+         - "8282:80"
+      volumes:
+         - nextcloud:/var/www/html
+      restart: unless-stopped
+      networks:
+         - main_net
+
+
+
+volumes:
+   database-data:
+   nextcloud:
+
+networks:
+   main_net:
+
+
+
+
+
+
+
+
