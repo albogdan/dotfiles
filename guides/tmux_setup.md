@@ -2,7 +2,11 @@
 
 * Run: `sudo apt-get install tmux` to install
 
-* Copy the config into `~/.config/tmux/tmux.conf`
+* Setup Config Options:
+  1. Symlink it:
+      * `ln -s ~/dotfiles/tmux ~/.config`
+  2. Copy the config into `~/.config/tmux/tmux.conf`
+
 
 * If you run into issues with error 127 regarding tpm, run this command: `git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm` [(Source)](https://github.com/tmux-plugins/tmux-resurrect/issues/41)
 
